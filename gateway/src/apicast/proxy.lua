@@ -64,6 +64,7 @@ function _M.new(configuration)
     configuration = assert(configuration, 'missing proxy configuration'),
     cache = cache,
     cache_handler = cache_handler,
+    http_ng_backend = http_ng_ngx,
 
     -- Params to send in 3scale backend calls that are not the typical ones
     -- (credentials, usage, etc.).
@@ -140,7 +141,7 @@ function _M:authorize(service, usage, credentials, ttl)
     -- set cached_key to nil to avoid doing the authrep in post_action
     ngx.var.cached_key = nil
 
-    local backend = assert(backend_client:new(service, http_ng_ngx), 'missing backend')
+    local backend = assert(backend_client:new(service, self.http_ng_backend), 'missing backend')
     local res = backend:authrep(formatted_usage, credentials, self.extra_params_backend_authrep)
 
     local authorized, rejection_reason = self:handle_backend_response(cached_key, res, ttl)
