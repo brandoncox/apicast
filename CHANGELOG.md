@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Support for HTTP Proxy [THREESCALE-221](https://issues.jboss.org/browse/THREESCALE-221), [#709](https://github.com/3scale/apicast/issues/709)
 - Conditions for the limits of the rate-limit policy [PR #839](https://github.com/3scale/apicast/pull/839)
 - `bin/apicast console` to start Lua REPL with APIcast code loaded [PR #853](https://github.com/3scale/apicast/pull/853)
+- Support JWK through OIDC Discovery [PR #850](https://github.com/3scale/apicast/pull/850)
 
 ### Changed
 
