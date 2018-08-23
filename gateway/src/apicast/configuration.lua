@@ -29,6 +29,10 @@ local function map(func, tbl)
   return newtbl
 end
 
+local function value(val)
+    if val ~= null then return val end
+end
+
 local Service = require 'apicast.configuration.service'
 
 local noop = function() end
@@ -56,7 +60,7 @@ local function backend_endpoint(proxy)
 end
 
 local function build_policy_chain(policies)
-  if not policies or policies == null then return nil, 'no policy chain' end
+  if not value(policies) then return nil, 'no policy chain' end
 
   local chain = {}
 
@@ -101,7 +105,7 @@ function _M.parse_service(service)
       },
       backend = backend,
       oidc = {
-        issuer_endpoint = proxy.oidc_issuer_endpoint ~= ngx.null and proxy.oidc_issuer_endpoint
+        issuer = value(proxy.oidc_issuer_endpoint),
       },
       credentials = {
         location = proxy.credentials_location or 'query',
